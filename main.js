@@ -41,6 +41,8 @@ class Game {
         // 仮にy座標を+1ずつする
         this.currentTetromino.y += 1;
 
+        if (this.currentTetromino.y === 10) return;
+
     }
 
     checkGameOver(){
@@ -49,25 +51,141 @@ class Game {
 }
 
 class Tetromino {
+    tetrominoShapes = {
+        'T': {
+            shape: [
+                [1, 0, 0],
+                [1, 1, 0],
+                [1, 0, 0]
+            ],
+            color: 'purple'
+        },
+        'L': {
+            shape: [
+                [1, 0, 0],
+                [1, 0, 0],
+                [1, 1, 0]
+            ],
+            color: 'orange'
+        },
+        'I': {
+            shape: [
+                [0, 0, 0, 0],
+                [1, 1, 1, 1],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+            ],
+            color: 'cyan'
+        },
+        'O': {
+            shape: [
+                [1, 1],
+                [1, 1]
+            ],
+            color: 'yellow'
+        },
+        'S': {
+            shape: [
+                [0, 1, 1],
+                [1, 1, 0],
+                [0, 0, 0]
+            ],
+            color: 'green'
+        },
+        'J': {
+            shape: [
+                [0, 1, 0],
+                [0, 1, 0],
+                [1, 1, 0]
+            ],
+            color: 'blue'
+        },
+        'Z': {
+            shape: [
+                [1, 1, 0],
+                [0, 1, 1],
+                [0, 0, 0]
+            ],
+            color: 'red'
+        }
+    };
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.tetro = [
-            [0, 0, 0, 0],
-            [0, 1, 1, 1],
-            [0, 0, 0, 1],
-            [0, 0, 0, 0]
-        ]
-        this.color = "red";
+        this.tetroInfo = this.getRandomTetrominoShape();
+        this.tetrominoShapes = {
+            'T': {
+                shape: [
+                    [1, 0, 0],
+                    [1, 1, 0],
+                    [1, 0, 0]
+                ],
+                color: 'purple',
+            },
+            'L': {
+                shape: [
+                    [1, 0, 0],
+                    [1, 0, 0],
+                    [1, 1, 0]
+                ],
+                color: 'orange'
+            },
+            'I': {
+                shape: [
+                    [0, 0, 0, 0],
+                    [1, 1, 1, 1],
+                    [0, 0, 0, 0],
+                    [0, 0, 0, 0]
+                ],
+                color: 'cyan'
+            },
+            'O': {
+                shape: [
+                    [1, 1],
+                    [1, 1]
+                ],
+                color: 'yellow'
+            },
+            'S': {
+                shape: [
+                    [0, 1, 1],
+                    [1, 1, 0],
+                    [0, 0, 0]
+                ],
+                color: 'green'
+            },
+            'J': {
+                shape: [
+                    [0, 1, 0],
+                    [0, 1, 0],
+                    [1, 1, 0]
+                ],
+                color: 'blue'
+            },
+            'Z': {
+                shape: [
+                    [1, 1, 0],
+                    [0, 1, 1],
+                    [0, 0, 0]
+                ],
+                color: 'red'
+            }
+        };
+        this.tetro = this.tetroInfo.shape;
+        this.color = this.tetroInfo.color;
+        this.x = this.tetro[0].length
     }
 
-    initializeTetro() {
-
+    getRandomTetrominoShape() {
+        const shapes = Object.keys(this.tetrominoShapes);
+        const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+        return this.tetrominoShapes[randomShape];
     }
+    
 
     move(dx, dy){
-
-
+        this.x += dx;
+        this.y += dy;
     }
 
     rotate() {
