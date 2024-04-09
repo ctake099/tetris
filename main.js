@@ -79,11 +79,14 @@ class Field {
     }
 
     initializeGrid(rows, cols) {
-        [
-            [0, 0, 0, 0],
-            
-        ]
-
+        let grid = [];
+        for (let i = 0; i < rows; i++) {
+            grid[i] = [];
+            for (let j = 0; j < cols; j++) {
+                grid[i][j] = 0;
+            }
+        }
+        return grid;
     }
 
     addTetromino(tetro) {
@@ -102,6 +105,7 @@ class Renderer{
         this.blockSize = 25;
         this.canvas.width = this.blockSize * 10;
         this.canvas.height = this.blockSize * 20;
+        this.canvas.style.backgroundColor = "gray";
     }
 
     clear(){
