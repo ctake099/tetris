@@ -34,9 +34,13 @@ class Game {
         //ゲームの更新
         // テトロミノの落下、ラインの消去、ゲームオーバーかなど
         
-        console.log("update");
+        this.renderer.clear();
         this.renderer.drawField(this.field);
         this.renderer.drawTetromino(this.currentTetromino);
+        // プレイヤーの入力で動かす
+        // 仮にy座標を+1ずつする
+        this.currentTetromino.y += 1;
+
     }
 
     checkGameOver(){
