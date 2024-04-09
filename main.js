@@ -15,7 +15,7 @@ class Game {
     }
 
     generateNewTetromino(){
-        return new Tetromino(4, 0);
+        return new Tetromino();
 
     }
 
@@ -51,68 +51,7 @@ class Game {
 }
 
 class Tetromino {
-    tetrominoShapes = {
-        'T': {
-            shape: [
-                [1, 0, 0],
-                [1, 1, 0],
-                [1, 0, 0]
-            ],
-            color: 'purple'
-        },
-        'L': {
-            shape: [
-                [1, 0, 0],
-                [1, 0, 0],
-                [1, 1, 0]
-            ],
-            color: 'orange'
-        },
-        'I': {
-            shape: [
-                [0, 0, 0, 0],
-                [1, 1, 1, 1],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0]
-            ],
-            color: 'cyan'
-        },
-        'O': {
-            shape: [
-                [1, 1],
-                [1, 1]
-            ],
-            color: 'yellow'
-        },
-        'S': {
-            shape: [
-                [0, 1, 1],
-                [1, 1, 0],
-                [0, 0, 0]
-            ],
-            color: 'green'
-        },
-        'J': {
-            shape: [
-                [0, 1, 0],
-                [0, 1, 0],
-                [1, 1, 0]
-            ],
-            color: 'blue'
-        },
-        'Z': {
-            shape: [
-                [1, 1, 0],
-                [0, 1, 1],
-                [0, 0, 0]
-            ],
-            color: 'red'
-        }
-    };
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.tetroInfo = this.getRandomTetrominoShape();
+    constructor() {
         this.tetrominoShapes = {
             'T': {
                 shape: [
@@ -121,6 +60,7 @@ class Tetromino {
                     [1, 0, 0]
                 ],
                 color: 'purple',
+                startX: 4
             },
             'L': {
                 shape: [
@@ -128,7 +68,8 @@ class Tetromino {
                     [1, 0, 0],
                     [1, 1, 0]
                 ],
-                color: 'orange'
+                color: 'orange',
+                startX: 4
             },
             'I': {
                 shape: [
@@ -137,14 +78,16 @@ class Tetromino {
                     [0, 0, 0, 0],
                     [0, 0, 0, 0]
                 ],
-                color: 'cyan'
+                color: 'cyan',
+                startX: 3
             },
             'O': {
                 shape: [
                     [1, 1],
                     [1, 1]
                 ],
-                color: 'yellow'
+                color: 'yellow',
+                startX: 4
             },
             'S': {
                 shape: [
@@ -152,7 +95,8 @@ class Tetromino {
                     [1, 1, 0],
                     [0, 0, 0]
                 ],
-                color: 'green'
+                color: 'green',
+                startX: 3
             },
             'J': {
                 shape: [
@@ -160,7 +104,8 @@ class Tetromino {
                     [0, 1, 0],
                     [1, 1, 0]
                 ],
-                color: 'blue'
+                color: 'blue',
+                startX: 3
             },
             'Z': {
                 shape: [
@@ -168,12 +113,15 @@ class Tetromino {
                     [0, 1, 1],
                     [0, 0, 0]
                 ],
-                color: 'red'
+                color: 'red',
+                startX: 3
             }
         };
+        this.tetroInfo = this.getRandomTetrominoShape();
         this.tetro = this.tetroInfo.shape;
         this.color = this.tetroInfo.color;
-        this.x = this.tetro[0].length
+        this.x = this.tetroInfo.startX;
+        this.y = 0;
     }
 
     getRandomTetrominoShape() {
@@ -272,21 +220,3 @@ function gameStart() {
 }
 
 gameStart();
-
-
-// 1. Game
-// 役割:ゲームの状態、メインループ
-// 属性:ゲームオーバー判定、現在のテトロ
-// メソッド:ゲームの開始、終了、一時停止、再開
-// 2. Tetromino
-// 役割:テトロの状態
-// 属性:色,形状の二次元配列
-// メソッド:回転、移動、描画
-// 3. Field
-// 役割:フィールドの状態
-// 属性:盤面のサイズ、現在の盤面上のブロックの配置
-// メソッド:tetroを固定、tetroを動かせるか、行を消去
-// 4. Render
-// 役割:描画
-// 属性:canvas
-// メソッド:drawTetro,drawField,clear
